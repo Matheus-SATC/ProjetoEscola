@@ -5,6 +5,8 @@
  */
 package Pessoa;
 
+import java.util.Date;
+
 /**
  *
  * @author giulia.157217
@@ -18,6 +20,7 @@ public class Disciplina {
         this.nome = nome;
         this.departamento = departamento;
         this.status = status;
+        
     }
 
     public String getNome() {

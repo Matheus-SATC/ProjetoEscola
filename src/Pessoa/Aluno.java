@@ -12,15 +12,17 @@ import java.util.Date;
  *
  * @author giulia.157217
  */
-public class Aluno  {
+public class Aluno extends Pessoas  {
     private int matricula;
     private Date dataMatricula;
     
    ArrayList<Disciplina> Disciplina = new ArrayList<Disciplina>();
 
-    public Aluno(int matricula, Date dataMatricula) {
+    public Aluno(int matricula, Date dataMatricula, String nome, String rg, String cpf, Date dataNascimento) {
+        super(nome, rg, cpf, dataNascimento);
         this.matricula = matricula;
         this.dataMatricula = dataMatricula;
+        
     }
 
     public int getMatricula() {

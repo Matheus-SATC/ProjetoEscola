@@ -1,23 +1,27 @@
 /*
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package Pessoa;
 
+import java.util.Date;
+
 /**
  *
  * @author giulia.157217
  */
-public class Professor {
+public class Professor extends Pessoas {
     private int cargaHoraria;
     private float ValorHora;
     private float salario;
 
-    public Professor(int cargaHoraria, float ValorHora, float salario) {
+    public Professor(int cargaHoraria, float ValorHora, String nome, String rg, String cpf, Date dataNascimento) {
+        super(nome, rg, cpf, dataNascimento);
         this.cargaHoraria = cargaHoraria;
         this.ValorHora = ValorHora;
-        this.salario = this.calcSalario(ValorHora, cargaHoraria);
+        
     }
 
     public int getCargaHoraria() {
