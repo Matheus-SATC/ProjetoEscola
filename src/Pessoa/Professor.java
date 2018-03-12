@@ -22,6 +22,7 @@ public class Professor extends Pessoas {
         this.cargaHoraria = cargaHoraria;
         this.ValorHora = ValorHora;
         
+    
     }
 
     public int getCargaHoraria() {
