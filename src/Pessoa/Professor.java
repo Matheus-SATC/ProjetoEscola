@@ -6,6 +6,7 @@
  */
 package Pessoa;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,15 +17,21 @@ public class Professor extends Pessoas {
     private int cargaHoraria;
     private float ValorHora;
     private float salario;
+       ArrayList<Disciplina> Disciplina = new ArrayList<Disciplina>();
 
     public Professor(int cargaHoraria, float ValorHora, String nome, String rg, String cpf, Date dataNascimento) {
         super(nome, rg, cpf, dataNascimento);
         this.cargaHoraria = cargaHoraria;
         this.ValorHora = ValorHora;
         
-    
+    }
+    public ArrayList<Disciplina> getDisciplina(){
+        return Disciplina;
     }
 
+    public void setDisciplina(ArrayList<Disciplina> Disciplina) {
+        this.Disciplina = Disciplina;
+    }
     public int getCargaHoraria() {
         return cargaHoraria;
     }

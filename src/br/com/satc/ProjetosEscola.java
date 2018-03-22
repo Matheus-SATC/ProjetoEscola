@@ -8,8 +8,11 @@ package br.com.satc;
 import Pessoa.Aluno;
 import Pessoa.Disciplina;
 import Pessoa.Professor;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -26,49 +29,87 @@ public class ProjetosEscola {
      */
     public static void main(String[] args) throws ParseException {
     
-            String nome;
-            String departamento;
-            char status;
-            
-            nome = JOptionPane.showInputDialog("informe o nome da disciplina: ");
-            departamento = JOptionPane.showInputDialog("Informe o departamento: ");
-            status = JOptionPane.showInputDialog("Informe o status: ").charAt(0);
-            Disciplina escola = new Disciplina(nome, departamento, status);
-            
-            String nome2;
-            String rg;
-            String cpf;
-            Date dataNascimento;
-            int cargaHoraria;
-            float valorHora;
-            
-            nome2 = JOptionPane.showInputDialog("Iforme o nome do professor: ");
-            rg = JOptionPane.showInputDialog("Informe o rg do professor: ");
-            cpf = JOptionPane.showInputDialog("Informe o cpf do professor: ");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-            dataNascimento = sdf.parse(JOptionPane.showInputDialog("Informe a data de nascimento do professor: "));
-            cargaHoraria = Integer.parseInt(JOptionPane.showInputDialog("Informe a carga horaria: "));
-            valorHora = Float.parseFloat(JOptionPane.showInputDialog("Informe o valor da hora: "));
-            Professor curso = new Professor(cargaHoraria,valorHora,nome2,rg,cpf,dataNascimento);
-   
-            String nome3;
-            String rg3;
-            String cpf3;
-            Date dataNascimento3;
-            int matricula;
-            Date dataMatricula;
-             
-            nome3 = JOptionPane.showInputDialog("Informe o nome do aluno: ");
-            rg3 = JOptionPane.showInputDialog("Informe o rg do aluno: ");
-            cpf3 = JOptionPane.showInputDialog("Informe o cpf do aluno: ");
-            dataNascimento3 = sdf.parse(JOptionPane.showInputDialog("Informe a data de nascimento do aluno: "));  
-            matricula = Integer.parseInt(JOptionPane.showInputDialog("Informe a matricula: "));
-            dataMatricula = sdf.parse(JOptionPane.showInputDialog("Informe a data da matricula: "));
-            Aluno colegio = new Aluno(matricula,dataMatricula,nome3,rg3,cpf3,dataNascimento);
-           
-            JOptionPane.showMessageDialog(null, escola.toString());
-            JOptionPane.showMessageDialog(null, curso.toString());
-            JOptionPane.showMessageDialog(null, colegio.toString());
-    }
+int escMenu=0;
+ArrayList<Disciplina>materias= new ArrayList<>();
+ArrayList<Aluno>estudantes= new ArrayList<>();
+ArrayList<Professor>professores= new ArrayList<>();
+do{
     
+    escMenu = Integer.parseInt(JOptionPane.showInputDialog("Escolha uma das opções: \n"
+            + "1. Cadastro Disciplinas \n"
+            + "2. Cadastro de Alunos \n"
+            + "3. Cadastro de Professores \n"
+            + "4. Sair "));
+    
+    switch(escMenu){
+        
+        case 1: 
+            do {
+                String nome = JOptionPane.showInputDialog("Qual o nome: ");
+                String departamento = JOptionPane.showInputDialog("Qual departamento: ");
+                char status = JOptionPane.showInputDialog("Status:").charAt(0);
+                materias.add(new Disciplina(nome, departamento, status));
+            }while ((JOptionPane.showConfirmDialog(null, "Deseja continuar?")) == 0);
+            break;
+            
+         case 2:{
+         
+            
+           String nomeAluno = JOptionPane.showInputDialog("Informe o nome do aluno: ");
+           String rgAluno = JOptionPane.showInputDialog("Informe o RG do aluno: ");
+           String cpfAluno = JOptionPane.showInputDialog("Informe o CPF do aluno: ");
+           SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+           Date dataNascimentoAluno = sdf.parse(JOptionPane.showInputDialog("Informe a data de nascimento do aluno: "));  
+           int matriculaAluno = Integer.parseInt(JOptionPane.showInputDialog("Informe a matricula: "));
+           Date dataMatriculaAluno = sdf.parse(JOptionPane.showInputDialog("Informe a data da matricula: "));
+                estudantes.add(new Aluno(matriculaAluno,dataMatriculaAluno,nomeAluno,rgAluno,cpfAluno,dataNascimentoAluno));
+            if ((JOptionPane.showConfirmDialog(null, "O aluno já se cadastrou em alguma materia??")) == 0);
+            String materiasExistentes = "";
+            for(Disciplina materia : materias){
+                materiasExistentes += materias.indexOf(materia) + " " + materia.getNome() + "\n";
+            }
+            do{
+                int esc = Integer.parseInt(JOptionPane.showInputDialog(" -- Informe a matéria --  \n" +materiasExistentes));
+                estudantes.get(estudantes.size( ) -1).getDisciplina().add(materias.get(esc));
+            }while((JOptionPane.showConfirmDialog(null,"Tem outra materia para cadastrar?"))== 0);
+                    }
+                    
+                    
+            break;
+    
+            
+          case 3:{
+            
+             String nomeProfessor = JOptionPane.showInputDialog("Iforme o nome do professor: ");
+            String rgProfessor = JOptionPane.showInputDialog("Informe o RG do professor: ");
+            String cpfProfessor = JOptionPane.showInputDialog("Informe o CPF do professor: ");
+             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+            Date dataNascimentoProfessor = sdf.parse(JOptionPane.showInputDialog("Informe a data de nascimento do professor: "));
+            int cargaHorariaProfessor = Integer.parseInt(JOptionPane.showInputDialog("Informe a carga horaria: "));
+           float valorHoraProfessor = Float.parseFloat(JOptionPane.showInputDialog("Informe o valor da hora: "));
+                professores.add(new Professor(cargaHorariaProfessor,valorHoraProfessor,nomeProfessor,rgProfessor,cpfProfessor,dataNascimentoProfessor));
+                   if ((JOptionPane.showConfirmDialog(null, "O professor já se cadastrou em alguma materia??")) == 0);
+            String materiaExistentes = "";
+            for(Disciplina materia : materias){
+                materiaExistentes += materias.indexOf(materia) + " " + materia.getNome() + "\n";
+            }
+            do{
+                int esc = Integer.parseInt(JOptionPane.showInputDialog(" -- Informe a matéria --  \n" +materiaExistentes));
+                professores.get(professores.size( ) -1).getDisciplina().add(materias.get(esc));
+            }while((JOptionPane.showConfirmDialog(null,"Tem outra materia para cadastrar?"))== 0);
+          }
+            break;
+          
+    }
+            
+    } while (escMenu !=4);
+
+
 }
+
+
+}
+
+
+
+
