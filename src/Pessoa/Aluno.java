@@ -49,6 +49,7 @@ public class Aluno extends Pessoas  {
         this.Disciplina = Disciplina;
     }
 
+
     @Override
     public String toString() {
         return "Aluno{" + "matricula=" + matricula + ", dataMatricula=" + dataMatricula + ", Disciplina=" + Disciplina + '}';

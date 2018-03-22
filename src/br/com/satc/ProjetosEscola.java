@@ -39,7 +39,10 @@ do{
             + "1. Cadastro Disciplinas \n"
             + "2. Cadastro de Alunos \n"
             + "3. Cadastro de Professores \n"
-            + "4. Sair "));
+            + "4. Consulta das Disciplinas \n"
+            + "5. Consulta dos Alunos \n"
+            + "6. Consulta dos Professores \n"
+            + "7. Sair"));
     
     switch(escMenu){
         
@@ -88,7 +91,7 @@ do{
             int cargaHorariaProfessor = Integer.parseInt(JOptionPane.showInputDialog("Informe a carga horaria: "));
            float valorHoraProfessor = Float.parseFloat(JOptionPane.showInputDialog("Informe o valor da hora: "));
                 professores.add(new Professor(cargaHorariaProfessor,valorHoraProfessor,nomeProfessor,rgProfessor,cpfProfessor,dataNascimentoProfessor));
-                   if ((JOptionPane.showConfirmDialog(null, "O professor já se cadastrou em alguma materia??")) == 0);
+                   if ((JOptionPane.showConfirmDialog(null, "O professor já se cadastrou em alguma Disciplina??")) == 0);
             String materiaExistentes = "";
             for(Disciplina materia : materias){
                 materiaExistentes += materias.indexOf(materia) + " " + materia.getNome() + "\n";
@@ -99,10 +102,27 @@ do{
             }while((JOptionPane.showConfirmDialog(null,"Tem outra materia para cadastrar?"))== 0);
           }
             break;
-          
+          case 4: {
+           int DisciplinasCadastradas = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da disciplina que você está consultando: "));
+              materias.get(DisciplinasCadastradas);
+              JOptionPane.showConfirmDialog(null,materias.get(DisciplinasCadastradas).toString());
+           }
+          break;
+          case 5: {
+          int ProfessoresCadastrados = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do professor que você está consultando: "));
+          professores.get(ProfessoresCadastrados);
+          JOptionPane.showConfirmDialog(null, professores.get(ProfessoresCadastrados).toString()); 
+          }
+          break;
+          case 6: {
+          int AlunosCadastrados = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do aluno que você está consultando:"));
+          estudantes.get(AlunosCadastrados);
+          JOptionPane.showConfirmDialog(null, estudantes.get(AlunosCadastrados).toString());
+          }
+          break;
     }
-            
-    } while (escMenu !=4);
+    } while (escMenu !=7);
+
 
 
 }
